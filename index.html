@@ -156,80 +156,18 @@
         <section class="container mx-auto py-12 px-4">
             <h1 class="text-4xl md:text-5xl font-bold text-black mb-8">Trending Now</h1>
             <!-- card Container -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
-                <!-- card - 1 -->
-                <div class="card bg-base-100 w-80 sm:w-72 md:w-80 shadow-sm">
-                    <figure>
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes" />
-                    </figure>
-                    <div class="card-body">
-                        <div class="card-actions justify-between">
-                            <div class="badge badge-outline text-blue-500 bg-blue-100">Men's Clothing</div>
-                            <div class="badge badge-outline text-base font-medium text-gray-500"><i
-                                    class="fa-solid fa-star text-orange-400"></i>3.9(120)
-                            </div>
-                        </div>
-                        <h2 class="card-title">
-                            T-shirts are versatile, staple clothing..</clothing>
-                        </h2>
-                        <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$109.95</div>
-                        <div class="card-actions justify-between">
-                            <button class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
-                            <button class="btn btn-secondary bg-blue-500 border-none"><i
-                                    class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- card - 2 -->
-                <div class="card bg-base-100 w-80 sm:w-72 md:w-80 shadow-sm">
-                    <figure>
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes" />
-                    </figure>
-                    <div class="card-body">
-                        <div class="card-actions justify-between">
-                            <div class="badge badge-outline text-blue-500 bg-blue-100">Men's Clothing</div>
-                            <div class="badge badge-outline text-base font-medium text-gray-500"><i
-                                    class="fa-solid fa-star text-orange-400"></i>3.9(120)
-                            </div>
-                        </div>
-                        <h2 class="card-title">
-                            T-shirts are versatile, staple clothing..</clothing>
-                        </h2>
-                        <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$109.95</div>
-                        <div class="card-actions justify-between">
-                            <button class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
-                            <button class="btn btn-secondary bg-blue-500 border-none"><i
-                                    class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
-                        </div>
-                    </div>
-                </div>
-                <!-- card - 3 -->
-                <div class="card bg-base-100 w-80 sm:w-72 md:w-80 shadow-sm">
-                    <figure>
-                        <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes" />
-                    </figure>
-                    <div class="card-body">
-                        <div class="card-actions justify-between">
-                            <div class="badge badge-outline text-blue-500 bg-blue-100">Men's Clothing</div>
-                            <div class="badge badge-outline text-base font-medium text-gray-500"><i
-                                    class="fa-solid fa-star text-orange-400"></i>3.9(120)
-                            </div>
-                        </div>
-                        <h2 class="card-title">
-                            T-shirts are versatile, staple clothing..</clothing>
-                        </h2>
-                        <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$109.95</div>
-                        <div class="card-actions justify-between">
-                            <button class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
-                            <button class="btn btn-secondary bg-blue-500 border-none"><i
-                                    class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
-                        </div>
-                    </div>
-                </div>
+            <div id="trending-container"
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-items-center gap-6">
             </div>
+        </section>
+        <section>
+            <dialog id="my_modal_2" class="modal">
+                <div id="modal-detail" class="modal-box">
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </section>
     </main>
     <footer class="bg-neutral text-neutral-content pt-12">

@@ -75,8 +75,8 @@
         </nav>
     </header>
     <main>
-        <!-- Trending Now Section -->
-        <section class="container mx-auto py-12 px-4">
+        <!-- Browse Product Section -->
+        <section id="browse-container" class="container mx-auto py-12 px-4">
             <h1 class="text-4xl text-center md:text-5xl font-bold text-black mb-8">Our Products</h1>
             <!-- btn container -->
             <div id="btn-container" class="my-12 flex flex-wrap justify-center gap-6">
@@ -84,6 +84,9 @@
                     <button id="all-btn" onclick="loadAllProduct()"
                         class="btn cmn-btn btn-soft rounded-full hover:bg-blue-500 hover:text-white">ALL</button>
                 </div>
+            </div>
+            <div id="loadMenu" class="text-center hidden py-4">
+                <span class="loading loading-dots loading-xl"></span>
             </div>
             <!-- Product Container -->
             <div id="product-container"
@@ -95,6 +98,15 @@
                     </p>
                 </div>
             </div>
+            <!-- Open the modal using ID.showModal() method -->
+            <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
+            <dialog id="my_modal_2" class="modal">
+                <div id="modal-detail" class="modal-box">
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
         </section>
     </main>
     <footer class="bg-neutral text-neutral-content pt-12">

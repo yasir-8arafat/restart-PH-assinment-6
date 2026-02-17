@@ -1,10 +1,32 @@
+// loading menu
+
+const loaderActive = () => {
+    const loaderContainer = document.getElementById("loadMenu");
+    if (!loaderContainer) return;
+    loaderContainer.classList.remove("hidden")
+}
+const loaderDeActive = () => {
+    const loaderContainer = document.getElementById("loadMenu");
+    if (!loaderContainer) return;
+    loaderContainer.classList.add("hidden")
+}
+
+
 // All Load Function
 const loadCatergories = () => {
+    loaderActive();
     fetch("https://fakestoreapi.com/products/categories")
         .then((res) => res.json())
         .then((data) => {
             displayCategories(data);
         })
+}
+
+const loadSingledetail = (id) => {
+    const url = `https://fakestoreapi.com/products/${id}`;
+    fetch(url).then((res) => res.json()).then((data) => {
+        showDetail(data);
+    })
 }
 
 const remmoveActiveClass = () => {
@@ -14,6 +36,7 @@ const remmoveActiveClass = () => {
 }
 
 const loadAllProduct = () => {
+    loaderActive();
     fetch("https://fakestoreapi.com/products").then(res => res.json()).then(data => {
         displayAllProducts(data);
         remmoveActiveClass();
@@ -21,7 +44,14 @@ const loadAllProduct = () => {
     });
 }
 
+const loadTrending = () => {
+    fetch("https://fakestoreapi.com/products").then(res => res.json()).then(data => {
+        displayTrendingProducts(data);
+    });
+}
+
 const loadProductByCategories = (catProperty) => {
+    loaderActive();
     const url = `https://fakestoreapi.com/products/category/${catProperty}`;
     fetch(url).then(res => res.json()).then(data => {
         remmoveActiveClass();
@@ -37,6 +67,7 @@ const loadProductByCategories = (catProperty) => {
 // All Executive Function
 const displayCategories = (catgoriArr) => {
     const catchBtnContainer = document.getElementById("btn-container");
+    if (!catchBtnContainer) return;
     catgoriArr.forEach(catBtn => {
         const categoryBtn = document.createElement("div");
         categoryBtn.innerHTML = `
@@ -47,6 +78,31 @@ const displayCategories = (catgoriArr) => {
             loadProductByCategories(catBtn);
         })
     });
+    loaderDeActive();
+}
+
+
+const showDetail = (deatilObj) => {
+    const modalContainer = document.getElementById("modal-detail");
+    modalContainer.innerHTML = "";
+    const modalData = document.createElement("div");
+    modalData.className = "card bg-base-100 w-full shadow-sm"
+    modalData.innerHTML = `
+  <div class="card-body">
+    <div class = "flex flex-wrap gap-3 justify-center sm:justify-between">
+       <div class="badge badge-outline text-blue-500 bg-blue-100">Price: $${deatilObj.price}</div>
+       <div class="badge bg-orange-100 badge-outline text-base font-medium text-gray-500">rating : <i
+           class="fa-solid fa-star text-orange-400"></i>${deatilObj.rating.rate}
+       </div>
+    </div>
+    <h2 class="card-title text-gray-700 text-xl font-bold">${deatilObj.title}</h2>
+    <p class = "text-base font-semibold text-gray-400">${deatilObj.description}</p>
+    <div class="card-actions justify-end">
+      <button class="btn btn-primary">Add to Cart</button>
+    </div>
+  </div>
+    `
+    modalContainer.appendChild(modalData);
 }
 
 // const displayCategories = (catgoriArr) => {
@@ -87,18 +143,55 @@ const displayAllProducts = (productArr) => {
                         <h2 class="card-title line-clamp-2">
                             ${productObj.title}</clothing>
                         </h2>
-                        <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$${productObj.price}</div>
+                    <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$${productObj.price}</div>
                         <div class="card-actions justify-between">
-                            <button class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
+                            <button onclick="my_modal_2.showModal(); loadSingledetail(${productObj.id})" class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
                             <button class="btn btn-secondary bg-blue-500 border-none"><i
                                     class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
                         </div>
                     </div>
         `;
         catchProductContainer.appendChild(newProduct);
+    });
+    loaderDeActive();
+}
 
+
+const displayTrendingProducts = (trendproductArr) => {
+    const catchTrendingContainer = document.getElementById("trending-container");
+    if (!catchTrendingContainer) return;
+    trendproductArr.forEach(productObj => {
+        const newProduct = document.createElement("div");
+        newProduct.className = "card bg-base-100 w-80 sm:w-72 md:w-80 xl:w-95 2xl:w-80 shadow-sm border-1 border-gray-300";
+        newProduct.innerHTML = `
+                    <figure class="h-64 bg-gray-100 p-2">
+                        <img class="w-full h-full rounded-xl" src="${productObj.image}"
+                            alt="Shoes" />
+                    </figure>
+                    <div class="card-body">
+                        <div class="card-actions justify-between">
+                            <div class="badge badge-outline text-blue-500 bg-blue-100">${productObj.category}</div>
+                            <div class="badge badge-outline text-base font-medium text-gray-500"><i
+                                    class="fa-solid fa-star text-orange-400"></i>${productObj.rating.rate}(${productObj.rating.count})
+                            </div>
+                        </div>
+                        <h2 class="card-title line-clamp-2">
+                            ${productObj.title}</clothing>
+                        </h2>
+                    <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$${productObj.price}</div>
+                        <div class="card-actions justify-between">
+                            <button onclick="my_modal_2.showModal(); loadSingledetail(${productObj.id})" class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
+                            <button class="btn btn-secondary bg-blue-500 border-none"><i
+                                    class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
+                        </div>
+                    </div>
+        `;
+        if (productObj.rating.rate >= 4.7) {
+            catchTrendingContainer.appendChild(newProduct);
+        }
     });
 }
 
 // All called Function
 loadCatergories();
+loadTrending();
