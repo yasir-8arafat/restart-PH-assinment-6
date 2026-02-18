@@ -47,8 +47,13 @@
                     </ul>
                 </div>
                 <div class="navbar-end">
-                    <a class="btn px-2 py-6 border-none rounded-full"><i
-                            class="fa-solid fa-cart-arrow-down fa-2xl"></i></a>
+                    <!-- cart btn -->
+                    <a onclick="showCartModal();my_modal_3.showModal()"
+                        class="btn px-2 py-6 border-none rounded-full relative"><i
+                            class="fa-solid fa-cart-arrow-down fa-2xl"></i><span
+                            class="absolute text-black font-normal text-sm p-1 -top-1 right-1 bg-orange-400 rounded-full"
+                            id="addedCartNo">0</span></a>
+                    <!-- cart btn over -->
                     <div class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
@@ -98,10 +103,25 @@
                     </p>
                 </div>
             </div>
+
+
             <!-- Open the modal using ID.showModal() method -->
             <!-- <button class="btn" onclick="my_modal_2.showModal()">open modal</button> -->
             <dialog id="my_modal_2" class="modal">
                 <div id="modal-detail" class="modal-box">
+                </div>
+                <form method="dialog" class="modal-backdrop">
+                    <button>close</button>
+                </form>
+            </dialog>
+
+
+            <!-- cart Modal -->
+            <!-- Open the modal using ID.showModal() method -->
+            <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
+            <dialog id="my_modal_3" class="modal">
+                <div id="carModalInfo" class="modal-box">
+                    
                 </div>
                 <form method="dialog" class="modal-backdrop">
                     <button>close</button>

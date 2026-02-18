@@ -49,6 +49,11 @@ const loadTrending = () => {
         displayTrendingProducts(data);
     });
 }
+const loadAllProductForCart = (clickedProductId) => {
+    fetch("https://fakestoreapi.com/products").then(res => res.json()).then(data => {
+        cartCollection(data, clickedProductId);
+    });
+}
 
 const loadProductByCategories = (catProperty) => {
     loaderActive();
@@ -80,6 +85,51 @@ const displayCategories = (catgoriArr) => {
     });
     loaderDeActive();
 }
+
+let cartArr = [];
+const cartCollection = (allProductsArray, clickedId) => {
+    const catchCart = document.getElementById("addedCartNo");
+    for (let i of allProductsArray) {
+        if (i.id === clickedId) {
+            cartArr.push(i);
+        }
+    }
+    catchCart.innerText = cartArr.length;
+}
+
+const removeCart = (id) => {
+    cartArr = cartArr.filter(obj => obj.id !== id);
+    console.log(cartArr);
+}
+
+const showCartModal = () => {
+    const catchcartModal = document.getElementById("carModalInfo");
+    catchcartModal.innerHTML = "";
+    let sum = 0;
+    cartArr.forEach(cartObj => {
+        sum = sum + cartObj.price;
+        const modalData = document.createElement("div");
+        modalData.className = "card bg-base-100 w-full shadow-sm mb-4"
+        modalData.innerHTML = `
+  <div class="card-body">
+    <h2 class="card-title text-gray-700 text-xl font-bold">${cartObj.title}</h2>
+   <div class = "flex flex-wrap gap-3 justify-center sm:justify-between">
+    <div class="badge badge-outline py-3  font-bold text-xl text-blue-500 bg-blue-100">Price: $${cartObj.price}</div>
+    <div onclick = "removeCart(${cartObj.id})" class="badge badge-outline py-3  font-medium text-xl text-gray-600 bg-gray-100">Remove This Product</div>
+   </div>
+  </div>
+    `;
+        catchcartModal.appendChild(modalData);
+    })
+    const totalPrice = document.createElement("div");
+    totalPrice.innerHTML = `
+        <h1 class="text-center mt-3 font-bold text-xl text-gray-600">
+            The Total Price : $${sum}
+        </h1>
+    `;
+    catchcartModal.appendChild(totalPrice);
+}
+
 
 
 const showDetail = (deatilObj) => {
@@ -146,7 +196,7 @@ const displayAllProducts = (productArr) => {
                     <div class="badge badge-secondary bg-slate-50 text-gray-700 font-bold">$${productObj.price}</div>
                         <div class="card-actions justify-between">
                             <button onclick="my_modal_2.showModal(); loadSingledetail(${productObj.id})" class="btn btn-secondary"><i class="fa-regular fa-eye fa-sm"></i>Details</button>
-                            <button class="btn btn-secondary bg-blue-500 border-none"><i
+                            <button onclick = "loadAllProductForCart(${productObj.id})" class="btn btn-secondary bg-blue-500 border-none"><i
                                     class="fa-solid fa-cart-arrow-down fa-sm"></i>ADD</button>
                         </div>
                     </div>
